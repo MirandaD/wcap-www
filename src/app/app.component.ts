@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Http, Request, RequestMethod, HttpModule} from '@angular/http';
 
 import {WechatAuthenticationService} from './wechat-authentication.service'
 
@@ -38,3 +37,4 @@ export class AppComponent {
     }
   }
 }
+
