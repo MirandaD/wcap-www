@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Http, Request, RequestMethod, HttpModule} from '@angular/http';
 
 import {WechatAuthenticationService} from './wechat-authentication.service'
-import { setTimeout } from 'timers';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

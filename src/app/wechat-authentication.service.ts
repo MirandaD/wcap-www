@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Http, Request, RequestMethod, HttpModule} from '@angular/http';
-import { Response } from '_debugger';
 
 @Injectable()
 export class WechatAuthenticationService {
