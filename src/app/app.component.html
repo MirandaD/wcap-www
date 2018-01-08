@@ -22,10 +22,14 @@
   </p>
 </div>
 </div>
-<div style="text-align:center">
+<div style="text-align:center" *ngIf="!loggedIn">
   <img width="300" alt="Angular Logo" src={{logo}} (click)="getQRcode()">
 </div>
+<div style="text-align:center" *ngIf="loggedIn">
+    You have successfully logged in, starting to load msg...
+  </div>
 <div *ngIf="qrCodeUrl.length > 2">
     <qr-code [value]=qrCodeUrl [size]="150"></qr-code>
 </div>
+<button type="button" (click)="checkLogin()">Check login</button>
 
