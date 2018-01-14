@@ -10,8 +10,9 @@ export class WechatAuthenticationService {
   userId = '5a5b3e0c5e2550c9cb500181'
   username = 'tester'
   email = 'email'
+  backendBase = 'https://wcap-backend.herokuapp.com/'
   getQRcode = function (){
-    return this.http.get('http://localhost:3001/get-qrcode/' + this.userId)
+    return this.http.get(this.backendBase + 'get-qrcode/' + this.userId)
   }
   checkLogin = function (qrcodeUrl, customReplyBody){
     const qrcodeUrlArray = qrcodeUrl.split('/');
@@ -20,7 +21,7 @@ export class WechatAuthenticationService {
       method: 'POST'
     }
     customReplyBody['userId'] = this.userId
-    return this.http.post('http://localhost:3001/check-login/' + uuid, customReplyBody, option)
+    return this.http.post(this.backendBase + 'check-login/' + uuid, customReplyBody, option)
   }
   userLogin = function (email, password){
     const loginInfo = {
@@ -28,7 +29,7 @@ export class WechatAuthenticationService {
       password: password
     }
     console.log(loginInfo)
-    return this.http.post('http://localhost:3001/login', loginInfo)
+    return this.http.post(this.backendBase + 'login', loginInfo)
   }
   setUserId = function(user){
     this.userId = user._id
