@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {WechatAuthenticationService} from './wechat-authentication.service'
-import { logging } from 'selenium-webdriver';
+import {WechatAuthenticationService} from './wechat-authentication.service';
 import { Time } from '@angular/common/src/i18n/locale_data_api';
 
 @Component({
