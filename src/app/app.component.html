@@ -1,31 +1,91 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><img src="{{logo_mini}}" width="30px"/></a>
+      <a class="navbar-brand" href="#">
+        <img src="{{logo_mini}}" width="30px" />
+      </a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Login</a></li>
+      <li class="active">
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+      <li>
+        <a href="#">Login</a>
+      </li>
     </ul>
   </div>
 </nav>
 <div class="jumbotron">
   <div class="container">
-  <h1 class="display-4">WeChat Assistant</h1>
-  <p class="lead">Help you to manage your personal WeChat account.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Login</a>
-    Or
-    <a class="btn btn-primary btn-lg" href="#" role="button">Acquire Account</a>
-  </p>
+    <h1 class="display-4">WeChat Assistant</h1>
+    <p class="lead">Help you to manage your personal WeChat account.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Login</a>
+      Or
+      <a class="btn btn-primary btn-lg" href="#" role="button">Acquire Account</a>
+    </p>
+  </div>
 </div>
-</div>
-<div style="text-align:center">
-  <img width="300" alt="Angular Logo" src={{logo}} (click)="getQRcode()">
-</div>
-<div *ngIf="qrCodeUrl.length > 2">
-    <qr-code [value]=qrCodeUrl [size]="150"></qr-code>
+<div class="alert alert-warning" role="alert" *ngIf="errorMessage.length>2">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Warning!</strong> {{errorMessage}}
 </div>
 
+<div class="container" *ngIf="userLoggedIn">
+  <div style="text-align:center" *ngIf="!loggedIn">
+    Please click the big "A" to obtain the QR code and scan it.
+    <br>
+    <img width="300" alt="Angular Logo" src={{logo}} (click)="getQRcode()" *ngIf="qrCodeUrl.length<2">
+    <qr-code [value]=qrCodeUrl [size]="300" *ngIf="qrCodeUrl.length > 2"></qr-code>
+  </div>
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      Setup your reply message here:
+      <form name="customReply" (ngSubmit)="checkLogin()">
+        <div class="form-group">
+          <label for="new_friend">Default reply message</label>
+          <input type="text" class="form-control" name="default" placeholder="Your default reply" [(ngModel)]="customReply.default">
+        </div>
+        <div class="form-group">
+          <label for="new_friend">Default message for newly added friend</label>
+          <input type="text" class="form-control" name="new_friend" placeholder="Your default msg to new friend" [(ngModel)]="customReply.new_friend">
+        </div>
+        <br>
+        Scan the QR code above to start.
+        <button type="button" class="btn btn-primary btn-lg btn-block" type="submit" *ngIf="canCheckLogin">Check login state after you hit confirm on your phone</button>
+      </form>
+    </div>
+
+    <div class="col-xs-2"></div>
+  </div>
+  <div style="text-align:center" *ngIf="loggedIn">
+    You have successfully logged in, starting to load msg...
+  </div>
+</div>
+
+<div class="container" *ngIf="!userLoggedIn">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <form class="col-xs-8" (ngSubmit)="userLogin()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" placeholder="Email" [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="text" class="form-control" name="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+      <button type="button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+    </form>
+    <div class="col-xs-2"></div>
+  </div>
+</div>
