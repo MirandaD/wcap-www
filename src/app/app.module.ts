@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { QRCodeModule } from 'angular2-qrcode'
+import { QRCodeModule } from 'angular2-qrcode';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { WechatAuthenticationService } from './wechat-authentication.service'
@@ -14,7 +15,8 @@ import { WechatAuthenticationService } from './wechat-authentication.service'
   imports: [
     BrowserModule,
     HttpModule,
-    QRCodeModule
+    QRCodeModule,
+    FormsModule
   ],
   providers: [WechatAuthenticationService],
   bootstrap: [AppComponent]
