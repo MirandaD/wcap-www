@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {WechatAuthenticationService} from './wechat-authentication.service';
 import { Time } from '@angular/common/src/i18n/locale_data_api';
+import { SetCustomReplyComponent } from './set-custom-reply/set-custom-reply.component'
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent {
     default: 'Welcome!',
     new_friend: 'Nice to meet you!'
   };
+  isCustomMsgSetup = false
   constructor(private wechatAuthenticationService: WechatAuthenticationService) {}
   getQRcode = function () {
     this.wechatAuthenticationService.getQRcode()
@@ -45,7 +47,7 @@ export class AppComponent {
       const customMsg = {key: key, value: this.customReply[key]}
       customReplyMsgArray.push(customMsg)
     }
-      this.wechatAuthenticationService.checkLogin(this.qrCodeUrl, {customReply: customReplyMsgArray})
+      this.wechatAuthenticationService.checkLogin(this.qrCodeUrl)
       .subscribe((res) => {
         this.loggedIn = res.text();
       },

@@ -5,12 +5,16 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { WechatAuthenticationService } from './wechat-authentication.service'
+import { WechatAuthenticationService } from './wechat-authentication.service';
+import { SetCustomReplyComponent } from './set-custom-reply/set-custom-reply.component';
+import { GetQrCodeComponent } from './get-qr-code/get-qr-code.component'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SetCustomReplyComponent,
+    GetQrCodeComponent
   ],
   imports: [
     BrowserModule,

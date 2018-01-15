@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <h3><b>Step 1: </b> Setup your automatic reply</h3>
+      <form name="customReply" (ngSubmit)="setUpCustomReply()">
+        <div class="form-group">
+          <label for="new_friend">Default reply message</label>
+          <input type="text" class="form-control" name="default" placeholder="Your default reply" [(ngModel)]="customReply.default">
+        </div>
+        <div class="form-group">
+          <label for="new_friend">Default message for newly added friend</label>
+          <input type="text" class="form-control" name="new_friend" placeholder="Your default msg to new friend" [(ngModel)]="customReply.new_friend">
+        </div>
+        <br>
+        {{isCustomMsgSetup}}
+        <button type="button" class="btn btn-primary btn-lg btn-block" type="submit">Set Custom Reply</button>
+      </form>
+    </div>
+    <div class="col-xs-2"></div>
+</div>

@@ -40,33 +40,15 @@
 </div>
 
 <div class="container" *ngIf="userLoggedIn">
-  <div style="text-align:center" *ngIf="!loggedIn">
+  <div style="text-align:center" *ngIf="!loggedIn && isCustomMsgSetup">
     Please click the big "A" to obtain the QR code and scan it.
     <br>
     <img width="300" alt="Angular Logo" src={{logo}} (click)="getQRcode()" *ngIf="qrCodeUrl.length<2">
     <qr-code [value]=qrCodeUrl [size]="300" *ngIf="qrCodeUrl.length > 2"></qr-code>
   </div>
-  <div class="row">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-8">
-      Setup your reply message here:
-      <form name="customReply" (ngSubmit)="checkLogin()">
-        <div class="form-group">
-          <label for="new_friend">Default reply message</label>
-          <input type="text" class="form-control" name="default" placeholder="Your default reply" [(ngModel)]="customReply.default">
-        </div>
-        <div class="form-group">
-          <label for="new_friend">Default message for newly added friend</label>
-          <input type="text" class="form-control" name="new_friend" placeholder="Your default msg to new friend" [(ngModel)]="customReply.new_friend">
-        </div>
-        <br>
-        Scan the QR code above to start.
-        <button type="button" class="btn btn-primary btn-lg btn-block" type="submit" *ngIf="canCheckLogin">Check login state after you hit confirm on your phone</button>
-      </form>
-    </div>
-
-    <div class="col-xs-2"></div>
-  </div>
+  {{isCustomMsgSetup}}
+  <app-set-custom-reply [(isCustomMsgSetup)]="isCustomMsgSetup" *ngIf="!isCustomMsgSetup"></app-set-custom-reply>
+  <button type="button" class="btn btn-primary btn-lg btn-block" type="submit" *ngIf="canCheckLogin">Check login state after you hit confirm on your phone</button>
   <div style="text-align:center" *ngIf="loggedIn">
     You have successfully logged in, starting to load msg...
   </div>
