@@ -1,4 +1,4 @@
-<div style="text-align:center" *ngIf="!loggedIn && isCustomMsgSetup">
+<div style="text-align:center">
   Step 2:Please click the big "A" to obtain the QR code and scan it.
   <br>
   <img width="300" alt="" src={{logo}} (click)="getQRcode()" *ngIf="qrCodeUrl.length<2">
