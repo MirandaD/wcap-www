@@ -26,7 +26,6 @@ export class SetCustomReplyComponent implements OnInit {
     this.wechatAuthenticationService.setCustomReply(customReplyMsgArray)
     this.isCustomMsgSetup = true
     this.isCustomMsgSetupChange.emit(true)
-    console.log('set',customReplyMsgArray)
   }
 }
 

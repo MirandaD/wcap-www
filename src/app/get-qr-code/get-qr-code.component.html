@@ -1,3 +1,6 @@
-<p>
-  get-qr-code works!
-</p>
+<div style="text-align:center" *ngIf="!loggedIn && isCustomMsgSetup">
+  Step 2:Please click the big "A" to obtain the QR code and scan it.
+  <br>
+  <img width="300" alt="" src={{logo}} (click)="getQRcode()" *ngIf="qrCodeUrl.length<2">
+  <qr-code [value]=qrCodeUrl [size]="300" *ngIf="qrCodeUrl.length > 2 && !startingChatbot"></qr-code>
+</div>

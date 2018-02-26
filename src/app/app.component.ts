@@ -23,11 +23,12 @@ export class AppComponent {
   password = '';
   userLoggedIn = true;
 
-  canCheckLogin = false;
+  qrCodeReturned = false;
   customReply={
     default: 'Welcome!',
     new_friend: 'Nice to meet you!'
   };
+  startingChatbot = false;
   isCustomMsgSetup = false
   constructor(private wechatAuthenticationService: WechatAuthenticationService) {}
   getQRcode = function () {
@@ -35,23 +36,24 @@ export class AppComponent {
       .subscribe((res: Response) => {
         this.qrCodeUrl = res.text();
         console.log('qrCode returned')
-        this.canCheckLogin = true
+        this.qrCodeReturned = true
       },
       (error)=>{console.log(error);},
     );
   }
 
   checkLogin = () => {
-    const customReplyMsgArray = []
+    this.startingChatbot = true;
+    const customReplyMsgArray = [];
     for (let key in this.customReply) {
-      const customMsg = {key: key, value: this.customReply[key]}
+      const customMsg = { key: key, value: this.customReply[key] }
       customReplyMsgArray.push(customMsg)
     }
-      this.wechatAuthenticationService.checkLogin(this.qrCodeUrl)
+    this.wechatAuthenticationService.checkLogin(this.qrCodeUrl)
       .subscribe((res) => {
         this.loggedIn = res.text();
       },
-      (error)=>{
+      (error) => {
         console.log(error)
         const errorStatus = error.status
         switch (errorStatus) {
@@ -64,7 +66,7 @@ export class AppComponent {
           case 404:
           case 0:
             this.errorMessage = 'Please obtain the qr code first by clicking on the button.'
-          break;
+            break;
           case 500:
             this.errorMessage = 'Server Error. Please retry.'
             break;
@@ -72,14 +74,16 @@ export class AppComponent {
             this.errorMessage = 'Unknow error'
             break;
         }
+      },
+      () => {
+        this.startingChatbot = false
       }
-    )
-    }
+      )
+  }
 
     userLogin = ()=>{
       this.wechatAuthenticationService.userLogin(this.email, this.password)
       .subscribe((res) => {
-        console.log(res.json())
         this.wechatAuthenticationService.setUserId(res.json())
         this.userLoggedIn = true
       },
@@ -101,6 +105,12 @@ export class AppComponent {
             break;
         }
       })
+    }
+
+    enableCheckLogin = ()=>{
+      // when will the check login button showable?
+      // 1. qrcode returned 2. checking not started 3. not loggedin already
+      return this.qrCodeReturned && !this.startingChatbot && !this.loggedIn
     }
 
     closeAlert = ()=>{

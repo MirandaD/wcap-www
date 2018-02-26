@@ -7,14 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { WechatAuthenticationService } from './wechat-authentication.service';
 import { SetCustomReplyComponent } from './set-custom-reply/set-custom-reply.component';
-import { GetQrCodeComponent } from './get-qr-code/get-qr-code.component'
+import { GetQrCodeComponent } from './get-qr-code/get-qr-code.component';
+import { LoadingComponent } from './loading/loading.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SetCustomReplyComponent,
-    GetQrCodeComponent
+    GetQrCodeComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
