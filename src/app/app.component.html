@@ -50,7 +50,12 @@
   <button type="button" class="btn btn-primary btn-lg btn-block" (click)="checkLogin()" *ngIf="enableCheckLogin()">Check login state after you hit confirm on your phone</button>
   <app-loading *ngIf="startingChatbot"></app-loading>
   <div style="text-align:center" *ngIf="loggedIn">
-    You have successfully logged in, starting chatbot...
+    <p>
+    You have successfully logged in, chatbot is replying message for you.
+    </p>
+    <p>
+      Chatbot will disconnected until you hit log out from your phone.
+    </p>
   </div>
 </div>
 
